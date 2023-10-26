@@ -14,7 +14,12 @@ class Predictor:
             custom_pipeline="latent_consistency_txt2img",
             custom_revision="main"
         )
-        model.to(torch_device="cpu", torch_dtype=torch.float32).to('mps:0')
+        if torch.cuda.is_available():
+            model.to("cuda")
+        elif torch.backends.mps.is_available():
+            model.to(torch_device="cpu", torch_dtype=torch.float32).to('mps:0')
+        else:
+            model.to("cpu")
         return model
 
     def predict(self, prompt: str, width: int, height: int, steps: int, seed: int = None) -> str:
