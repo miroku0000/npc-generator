@@ -7,13 +7,13 @@ def replace_string_in_file(file_path, search_string, replace_string):
         # Read in the file with UTF-8 encoding
         with open(file_path, 'r', encoding='utf-8') as file:
             filedata = file.read()
-
-        # Replace the target string
-        filedata = filedata.replace(search_string, replace_string)
-
-        # Write the file out again
-        with open(file_path, 'w', encoding='utf-8') as file:
-            file.write(filedata)
+        if search_string in filedata:  
+            # Replace the target string
+            filedata = filedata.replace(search_string, replace_string)
+            # Write the file out again
+            with open(file_path, 'w', encoding='utf-8') as file:
+                file.write(filedata)
+            os.system("python -m compileall .")
     except UnicodeDecodeError:
         print(f"Skipping file (not a text file or encoding issue): {file_path}")
     except Exception as e:
@@ -34,4 +34,4 @@ replace_string = "if True"
 search_and_replace_in_directory('.', search_string, replace_string)
 
 # Execute the compileall command
-os.system("python -m compileall .")
+#os.system("python -m compileall .")
