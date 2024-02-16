@@ -5,6 +5,17 @@ import glob
 import shutil
 import random
 
+def create_output_directory():
+    # Define the directory path
+    directory = "output"
+    # Check if the directory already exists
+    if not os.path.exists(directory):
+        # Create the directory if it doesn't exist
+        os.makedirs(directory)
+        print(f"Directory '{directory}' was created.")
+    else:
+        print(f"Directory '{directory}' already exists.")
+
 def write_to_file(file_path, text):
     """
     Opens a text file and writes the specified text to it.
@@ -123,6 +134,8 @@ parser.add_argument("--imagesperscenario",type=int, default = 4)
 parser.add_argument("--scenarios", type=int, default = 4)
 
 args=parser.parse_args()
+
+create_output_directory()
 
 # Randomly generate a prompt 4 times, or however many you specify in the scenarios parameter
 # So, each time it will generate unique NPC characteristics
