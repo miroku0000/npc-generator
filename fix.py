@@ -3,6 +3,7 @@
 import os
 
 def replace_string_in_file(file_path, search_string, replace_string):
+    if "fix.py" in file_path return ""
     try:
         found = False
         # Read in the file with UTF-8 encoding
