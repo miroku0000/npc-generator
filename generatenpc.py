@@ -65,7 +65,7 @@ def generatenpc(npcrace="", npcclass="", npcgender=""):
     
     """
 	randomgender = r("npcgender.txt")
-	if not npcgender:
+	if not npcgender or 'random' in npcgender:
 		npcgender = column(randomgender,0)
 	randommouth = r("npcmouths.txt")
 	mouth_a_an = column(randommouth,1)
@@ -74,9 +74,9 @@ def generatenpc(npcrace="", npcclass="", npcgender=""):
 	topcolor = column(randomclothescolors,0)
 	leggingscolor = column(randomclothescolors,1)
 	shoescolor = column(randomclothescolors,2)
-	if not npcclass:
+	if not npcclass or 'random' in npcclass:
 		npcclass = r("npcclass.txt")
-	if not npcrace:
+	if not npcrace or 'random' in npcrace:
 		npcrace = npcrace = r("npcrace.txt")
 	desc = r("npcheight.txt") + " " 
 	desc = desc + r("npcattractiveness.txt") + " " 
@@ -114,9 +114,9 @@ def createPicture(desc, seed):
 
 
 parser=argparse.ArgumentParser(description="sample argument parser")
-parser.add_argument("--npcrace", choices=['human','elf','dwarf','halfing','gnome','orc'])
-parser.add_argument("--npcclass", choices=['druid','bard','wizard','barbarian','rogue','sorcerer','warlock','cleric','fighter','shopkeep','bartender','whore','innkeeper'])
-parser.add_argument("--npcgender", choices=['male','female'])
+parser.add_argument("--npcrace", choices=['human','elf','dwarf','halfing','gnome','orc','random'], default='random')
+parser.add_argument("--npcclass", default='random', choices=['druid','bard','wizard','barbarian','rogue','sorcerer','warlock','cleric','fighter','shopkeep','bartender','whore','innkeeper','random'])
+parser.add_argument("--npcgender", default='random', choices=['male','female','random'])
 parser.add_argument("--seed")
 parser.add_argument("--folder")
 parser.add_argument("--imagesperscenario",type=int, default = 4)
