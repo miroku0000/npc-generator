@@ -129,14 +129,14 @@ def generatenpc(npcrace="", npcclass="", npcgender=""):
 	npc["gender"] = npcgender
 	return npc
 
-def createPicture(desc, seed):
+def createPicture(desc,steps=16, width=512, height=512, seed=""):
 	"""
     Generates a picture given a description. It will be in the output directory
 
     :param desc: string containing adescription to give the LLM for picture generation
     :param seed: Optionally, providing the seed will get you a known result.    
     """
-	cmd='venv\\Scripts\\activate venv && python main.py ' + '"' + desc+ '"' + ' --steps 16 --width 512 --height 512'
+	cmd='venv\\Scripts\\activate venv && python main.py ' + '"' + desc+ '"' + " --steps " +str(steps) + " --width " +str(width) + " --height " +  str(height)'
 	if seed:
 		print("using seed " +str(seed))
 		cmd = cmd + " --seed " + str(seed)
@@ -151,6 +151,9 @@ parser.add_argument("--seed")
 parser.add_argument("--folder")
 parser.add_argument("--imagesperscenario",type=int, default = 4)
 parser.add_argument("--scenarios", type=int, default = 4)
+parser.add_argument("--width", type=int, default=512)
+parser.add_argument("--height", type=int, default=512)
+
 
 args=parser.parse_args()
 
@@ -170,7 +173,9 @@ for i in range(args.scenarios):
 	print(prompt)
 	# The following will create <imagesperscenario> images for each prompt
 	for i in range(args.imagesperscenario):
-		createPicture(desc,args.seed)
+		createPicture(desc,args.args.seed)
+		createPicture(desc, args.steps, args.width, args.height):
+
 	if args.folder:
 		folder="output\\" + args.folder
 	else:
