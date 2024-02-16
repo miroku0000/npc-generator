@@ -1,4 +1,8 @@
-# Run latent consistency models on your Mac
+# Generate Images for D&D NPCS using a latent consistancy model
+
+
+
+# Run latent consistency models on your Mac/ PC or Linux
 
 Latent consistency models (LCMs) are based on Stable Diffusion, but they can generate images much faster, needing only 4 to 8 steps for a good image (compared to 25 to 50 steps). [Simian Luo et al](https://arxiv.org/abs/2310.04378) released the first Stable Diffusion distilled model. It’s distilled from the Dreamshaper fine-tune by incorporating classifier-free guidance into the model’s input.
 
