@@ -3,7 +3,8 @@
 import os
 
 def replace_string_in_file(file_path, search_string, replace_string):
-    if "fix.py" in file_path return ""
+    if "fix.py" in file_path:
+        return ""
     try:
         found = False
         # Read in the file with UTF-8 encoding
@@ -39,4 +40,4 @@ replace_string = "if True"
 search_and_replace_in_directory('.', search_string, replace_string)
 
 # Execute the compileall command
-os.system("python -m compileall .")
+#os.system("python -m compileall .")
