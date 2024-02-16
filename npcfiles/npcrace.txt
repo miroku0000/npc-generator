@@ -1,0 +1,5 @@
+elf
+dwarf
+gnome
+halfling
+human

@@ -1,0 +1,9 @@
+druid
+bard
+wizard
+barbarian
+rogue
+sorcerer
+warlock
+cleric
+fighter

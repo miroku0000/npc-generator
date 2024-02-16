@@ -1,0 +1,17 @@
+black|matching black|black
+black|matching black|brown
+black|white|black
+white|matching white|white
+blue|matching blue|black
+blue|black|black
+blue|red|black
+green|white|black
+coral|black|black
+coral|black|black
+coral|white|black
+coral|black|brown
+grey|black|black
+black|grey|black
+turquoise|black|black
+red|black|matching red
+red|black|black
