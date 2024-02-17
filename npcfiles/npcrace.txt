@@ -3,3 +3,4 @@ dwarf
 gnome
 halfling
 human
+tabaxi
