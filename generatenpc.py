@@ -138,7 +138,7 @@ def createPicture(desc,steps=16, width=512, height=512, seed=""):
 		cmd = cmd + " --seed " + str(seed)
 	os.system(cmd) 
 parser=argparse.ArgumentParser(description="sample argument parser")
-parser.add_argument("--npcrace", choices=['human','elf','dwarf','halfing','gnome','orc','random'], default='random')
+parser.add_argument("--npcrace", choices=['human','elf','dwarf','halfling','gnome','orc','tabaxi', 'random'], default='random')
 parser.add_argument("--npcclass", default='random', choices=['druid','bard','wizard','barbarian','rogue','sorcerer','warlock','cleric','fighter','shopkeep','bartender','whore','innkeeper','random'])
 parser.add_argument("--npcgender", default='random', choices=['male','female','random'])
 parser.add_argument("--seed")
