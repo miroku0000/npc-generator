@@ -15,7 +15,8 @@ class Predictor:
         model = DiffusionPipeline.from_pretrained(
             #"SimianLuo/LCM_Dreamshaper_v7"
             #"Ryzan/fantasy-diffusion-v1"
-            "Lykon/DreamShaper"
+            #"Lykon/DreamShaper"
+            "Lykon/dreamshaper-xl-v2-turbo"
         )
         if torch.cuda.is_available():
             model.to("cuda")
