@@ -24,9 +24,8 @@ def write_prompt_to_text_files(directory, prompt):
         print(f"Prompt written to {new_filepath}")
 
 
-def create_output_directory():
+def create_output_directory(directory="output"):
     # Define the directory path
-    directory = "output"
     # Check if the directory already exists
     if not os.path.exists(directory):
         # Create the directory if it doesn't exist
@@ -156,8 +155,11 @@ parser.add_argument("--height", type=int, default=512)
 
 
 args=parser.parse_args()
-
-create_output_directory()
+create_output_directory("output")
+create_output_directory("output/lcm")
+folder="output/lcm/"
+movefiles("output/",folder, "*.png")
+movefiles("output/",folder, "*.txt")
 
 # Randomly generate a prompt 4 times, or however many you specify in the scenarios parameter
 # So, each time it will generate unique NPC characteristics
