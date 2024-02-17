@@ -5,6 +5,8 @@ import time
 from diffusers import DiffusionPipeline
 
 class Predictor:
+
+    
     def __init__(self):
         self.pipe = self._load_model()
 
@@ -19,6 +21,23 @@ class Predictor:
         else:
             model.to("cpu")
         return model
+    
+    def write_prompt_to_text_files(directory, prompt):
+    # Search for all .png files in the specified directory
+    png_files = glob.glob(os.path.join(directory, '*.png'))
+    
+    for png_file in png_files:
+        # Generate the new filename by adding "_prompt.txt" to the original file name
+        base_name = os.path.basename(png_file)  # Get the base name of the file
+        new_filename = os.path.splitext(base_name)[0] + "_prompt.txt"  # Remove .png extension and add "_prompt.txt"
+        new_filepath = os.path.join(directory, new_filename)  # Create the full path for the new file
+        
+        # Write the prompt to the new text file
+        with open(new_filepath, 'w') as text_file:
+            text_file.write(prompt)
+            
+        print(f"Prompt written to {new_filepath}")
+        
 
     def predict(self, prompt: str, width: int, height: int, steps: int, seed: int = None) -> str:
         seed = seed or int.from_bytes(os.urandom(2), "big")
@@ -54,10 +73,12 @@ def main():
                 print(f"Output image saved to: {output_path}")
         except KeyboardInterrupt:
             print("\nStopped by user.")
+            predictor.write_prompt_to_text_files(output_dir, args.prompt)
     else:
         output_path = predictor.predict(args.prompt, args.width, args.height, args.steps, args.seed)
         print(f"Output image saved to: {output_path}")
-
+        predictor.write_prompt_to_text_files(output_dir, args.prompt)
+        
 def parse_args():
     parser = argparse.ArgumentParser(description="Generate images based on text prompts.")
     parser.add_argument("prompt", type=str, help="A single text prompt for image generation.")
