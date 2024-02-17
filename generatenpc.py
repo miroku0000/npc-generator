@@ -167,7 +167,7 @@ for i in range(args.scenarios):
 	npcclass = npc['class']
 	npcgender= npc['gender']	
 	prompt=r("npcprompts.txt") + " " + desc
-	#write_to_file('output\\prompt_' + npcgender +"_" + npcrace +"_" + npcclass+"_" + str(random.randint(10000000, 99999999))+".txt", prompt)
+	#write_to_file( os.path.join(output,prompt_' + npcgender +"_" + npcrace +"_" + npcclass+"_" + str(random.randint(10000000, 99999999))+".txt", prompt))
 	print(prompt)
 	# The following will create <imagesperscenario> images for each prompt
 	for i in range(args.imagesperscenario):
@@ -175,8 +175,11 @@ for i in range(args.scenarios):
 		createPicture(desc, args.steps, args.width, args.height)
 
 	if args.folder:
-		folder="output\\" + args.folder
+		os.path.join("output", args.folder)
+		#folder="output\\" + args.folder
 	else:
+		os.path.join("output",npcgender+ "_" + npcrace + "_" + npcclass  
+	
 		folder="output\\" + npcgender+ "_" + npcrace + "_" + npcclass  
 	#write_prompt_to_text_files("output/", prompt)
 	movefiles("output/",folder, "*.png")
