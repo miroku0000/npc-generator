@@ -35,11 +35,25 @@ def search_and_replace_in_directory(directory, search_string, replace_string):
              os.system("python -m compileall " + dirpath)
                     
 # Define the search and replace strings
-search_string = "if self.safety_checker is None"
+search_string = "if True"
 replace_string = "if True"
 
 # Replace string in all Python files starting from the current directory
 search_and_replace_in_directory('.', search_string, replace_string)
+
+
+search_string= "load_safety_checker: bool = False"
+replace_string = "load_safety_checker: bool = False"
+# Replace string in all Python files starting from the current directory
+search_and_replace_in_directory('.', search_string, replace_string)
+
+
+
+search_string= "if false:"
+replace_string = "if false:"
+# Replace string in all Python files starting from the current directory
+search_and_replace_in_directory('.', search_string, replace_string)
+
 
 # Execute the compileall command
 #os.system("python -m compileall .")
