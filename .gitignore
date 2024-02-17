@@ -2,3 +2,4 @@ venv
 *.png
 output/
 /.vs/npc-generator/FileContentIndex
+/.vs/*
