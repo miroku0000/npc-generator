@@ -1,6 +1,7 @@
 import os
 import torch
 import argparse
+import glob
 import time
 from diffusers import DiffusionPipeline
 
@@ -22,7 +23,7 @@ class Predictor:
             model.to("cpu")
         return model
     
-    def write_prompt_to_text_files(directory, prompt):
+    def write_prompt_to_text_files(self, directory, prompt):
         # Search for all .png files in the specified directory
         png_files = glob.glob(os.path.join(directory, '*.png'))
         for png_file in png_files:
@@ -70,10 +71,12 @@ def main():
                 print(f"Output image saved to: {output_path}")
         except KeyboardInterrupt:
             print("\nStopped by user.")
+            output_dir = "output"
             predictor.write_prompt_to_text_files(output_dir, args.prompt)
     else:
         output_path = predictor.predict(args.prompt, args.width, args.height, args.steps, args.seed)
         print(f"Output image saved to: {output_path}")
+        output_dir = "output"
         predictor.write_prompt_to_text_files(output_dir, args.prompt)
         
 def parse_args():
