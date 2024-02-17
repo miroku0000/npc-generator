@@ -175,18 +175,12 @@ for i in range(args.scenarios):
 		createPicture(desc, args.steps, args.width, args.height)
 
 	if args.folder:
-		os.path.join("output", args.folder)
+		folder=os.path.join("output", args.folder)
 		#folder="output\\" + args.folder
 	else:
-		os.path.join("output",npcgender+ "_" + npcrace + "_" + npcclass  
-	
-		folder="output\\" + npcgender+ "_" + npcrace + "_" + npcclass  
+		folder=os.path.join("output",npcgender+ "_" + npcrace + "_" + npcclass)  
+		#folder="output\\" + npcgender+ "_" + npcrace + "_" + npcclass  
 	#write_prompt_to_text_files("output/", prompt)
-	movefiles("output/",folder, "*.png")
-	movefiles("output/",folder, "*.txt")
+	movefiles("output",folder, "*.png")
+	movefiles("output",folder, "*.txt")
 	
-
-
-
-
-
