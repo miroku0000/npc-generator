@@ -59,17 +59,17 @@ replace_string = "if False:"
 search_and_replace_in_directory('.', search_string, replace_string)
 
 search_string= "if any(has_nsfw_concept):"
-replace_string = "if any(False):"
+replace_string = "if False:"
 # Replace string in all Python files starting from the current directory
 search_and_replace_in_directory('.', search_string, replace_string)
 
 search_string= "if any(nsfw_detected)"
-replace_string = "if any(False)"
+replace_string = "if False"
 # Replace string in all Python files starting from the current directory
 search_and_replace_in_directory('.', search_string, replace_string)
 
 search_string= "if any(has_nsfw_concepts)"
-replace_string = "if any(False)"
+replace_string = "if False"
 # Replace string in all Python files starting from the current directory
 search_and_replace_in_directory('.', search_string, replace_string)
 
