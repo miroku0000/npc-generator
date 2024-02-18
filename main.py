@@ -26,7 +26,7 @@ class Predictor:
             model.to("cpu")
         return model
 
-    def getMetaData(prompt, width,height, steps, model):
+    def getMetaData(self,prompt, width,height, steps, model):
         ret={"prompt":prompt, "width":width, "height":height, "steps":steps,"model":model}
         return json.dumps(ret)    
     def write_prompt_to_text_files(self, directory, prompt):
