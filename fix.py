@@ -58,8 +58,8 @@ replace_string = "if False:"
 # Replace string in all Python files starting from the current directory
 search_and_replace_in_directory('.', search_string, replace_string)
 
-search_string= "images[idx] = np.zeros(images[idx].shape, dtype=np.uint8)"
-replace_string = "#images[idx] = np.zeros(images[idx].shape, dtype=np.uint8)"
+search_string= "if any(has_nsfw_concept):"
+replace_string = "if any(False):"
 # Replace string in all Python files starting from the current directory
 search_and_replace_in_directory('.', search_string, replace_string)
 
