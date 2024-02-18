@@ -103,6 +103,10 @@ def generatenpc(npcrace="", npcclass="", npcgender=""):
 		npcclass = r("npcclass.txt")
 	if not npcrace or 'random' in npcrace:
 		npcrace = npcrace = r("npcrace.txt")
+	if "tabaxi" in npcrace:
+		race="tabaxi humanoid catlike person"
+	if "dwarf" in npcrace:
+		race="Lord of The Rings Dwarf"
 	desc = r("npcheight.txt") + " " 
 	desc = desc + r("npcattractiveness.txt") + " " 
 	desc = desc + npcgender + " " 
@@ -164,10 +168,6 @@ for i in range(args.scenarios):
 	npc = generatenpc(args.npcrace, args.npcclass , args.npcgender)
 	desc = npc['description']
 	npcrace = npc['race']
-	if "tabaxi" in npcrace:
-		race="tabaxi humanoid catlike person"
-	if "dwarf" in npcrace:
-		race="Lord of The Rings Dwarf"
 	npcclass = npc['class']
 	npcgender= npc['gender']	
 	prompt=r("npcprompts.txt") + " " + desc
