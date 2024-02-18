@@ -83,7 +83,7 @@ def main():
         output_path = predictor.predict(args.prompt, args.width, args.height, args.steps, args.seed)
         print(f"Output image saved to: {output_path}")
         output_dir = "output"
-        predictor.write_prompt_to_text_files(output_dir, self.getMetaData(args.prompt, args.width,args.height, args.steps, args.model))
+        predictor.write_prompt_to_text_files(output_dir, predictor.getMetaData(args.prompt, args.width,args.height, args.steps, args.model))
         
 def parse_args():
     parser = argparse.ArgumentParser(description="Generate images based on text prompts.")
