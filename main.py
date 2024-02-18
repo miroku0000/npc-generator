@@ -7,8 +7,7 @@ import json
 from diffusers import DiffusionPipeline
 
 class Predictor:
-    def getMetaData()
-
+    
     def __init__(self):
         self.pipe = self._load_model()
 
