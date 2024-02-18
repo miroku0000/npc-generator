@@ -39,39 +39,38 @@ def search_and_replace_in_directory(directory, search_string, replace_string):
 # Define the search and replace strings
 search_string = "if self.safety_checker is None"
 replace_string = "if False"
-
 # Replace string in all Python files starting from the current directory
 search_and_replace_in_directory('.', search_string, replace_string)
 
 search_string= "load_safety_checker: bool = True"
 replace_string = "load_safety_checker: bool = False"
 # Replace string in all Python files starting from the current directory
-search_and_replace_in_directory('.', search_string, replace_string)
+#search_and_replace_in_directory('.', search_string, replace_string)
 
 search_string= "if load_safety_checker:"
 replace_string = "if False:"
 # Replace string in all Python files starting from the current directory
-search_and_replace_in_directory('.', search_string, replace_string)
+#search_and_replace_in_directory('.', search_string, replace_string)
 
 search_string= "if has_nsfw_concept:"
 replace_string = "if False:"
 # Replace string in all Python files starting from the current directory
-search_and_replace_in_directory('.', search_string, replace_string)
+#search_and_replace_in_directory('.', search_string, replace_string)
 
 search_string= "if any(has_nsfw_concept):"
 replace_string = "if False:"
 # Replace string in all Python files starting from the current directory
-search_and_replace_in_directory('.', search_string, replace_string)
+#search_and_replace_in_directory('.', search_string, replace_string)
 
 search_string= "if any(nsfw_detected)"
 replace_string = "if False"
 # Replace string in all Python files starting from the current directory
-search_and_replace_in_directory('.', search_string, replace_string)
+#search_and_replace_in_directory('.', search_string, replace_string)
 
 search_string= "if any(has_nsfw_concepts)"
 replace_string = "if False"
 # Replace string in all Python files starting from the current directory
-search_and_replace_in_directory('.', search_string, replace_string)
+#search_and_replace_in_directory('.', search_string, replace_string)
 
 
 # Execute the compileall command
