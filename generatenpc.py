@@ -166,6 +166,8 @@ for i in range(args.scenarios):
 	npcrace = npc['race']
 	if "tabaxi" in npcrace:
 		race="tabaxi humanoid catlike person"
+	if "dwarf" in npcrace:
+		race="Lord of The Rings Dwarf"
 	npcclass = npc['class']
 	npcgender= npc['gender']	
 	prompt=r("npcprompts.txt") + " " + desc
@@ -175,7 +177,6 @@ for i in range(args.scenarios):
 	for i in range(args.imagesperscenario):
 		#createPicture(desc,args.args.seed)
 		createPicture(desc, args.steps, args.width, args.height)
-
 	if args.folder:
 		folder=os.path.join("output", args.folder)
 		#folder="output\\" + args.folder
