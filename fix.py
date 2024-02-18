@@ -38,7 +38,7 @@ def search_and_replace_in_directory(directory, search_string, replace_string):
                     
 # Define the search and replace strings
 search_string = "if self.safety_checker is None"
-replace_string = "if False"
+replace_string = "if True"
 # Replace string in all Python files starting from the current directory
 search_and_replace_in_directory('.', search_string, replace_string)
 
