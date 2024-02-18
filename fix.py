@@ -58,6 +58,13 @@ replace_string = "if False:"
 # Replace string in all Python files starting from the current directory
 search_and_replace_in_directory('.', search_string, replace_string)
 
+search_string= "images[idx] = np.zeros(images[idx].shape, dtype=np.uint8)"
+replace_string = "#images[idx] = np.zeros(images[idx].shape, dtype=np.uint8)"
+# Replace string in all Python files starting from the current directory
+search_and_replace_in_directory('.', search_string, replace_string)
+
+
+
 
 # Execute the compileall command
 #os.system("python -m compileall .")
