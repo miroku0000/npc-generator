@@ -104,9 +104,9 @@ def generatenpc(npcrace="", npcclass="", npcgender=""):
 	if not npcrace or 'random' in npcrace:
 		npcrace = npcrace = r("npcrace.txt")
 	if "tabaxi" in npcrace:
-		race="tabaxi humanoid catlike person"
+		npcrace="tabaxi humanoid catlike person"
 	if "dwarf" in npcrace:
-		race="Lord of The Rings Dwarf"
+		npcrace="Lord of The Rings Dwarf"
 	desc = r("npcheight.txt") + " " 
 	desc = desc + r("npcattractiveness.txt") + " " 
 	desc = desc + npcgender + " " 
