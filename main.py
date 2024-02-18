@@ -93,7 +93,7 @@ def parse_args():
     parser.add_argument("--steps", type=int, default=8, help="The number of inference steps.")
     parser.add_argument("--seed", type=int, default=None, help="Seed for random number generation.")
     parser.add_argument("--continuous", action='store_true', help="Enable continuous generation.")
-    parser.add_argument("--model",type=string, default="SimianLuo/LCM_Dreamshaper_v7", 
+    parser.add_argument("--model", default="SimianLuo/LCM_Dreamshaper_v7", 
         choices=['SimianLuo/LCM_Dreamshaper_v7','Ryzan/fantasy-diffusion-v1','Lykon/dreamshaper-xl-v2-turbo','Lykon/AAM_XL_AnimeMix_Turbo'])    
     return parser.parse_args()
 
