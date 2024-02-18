@@ -43,7 +43,6 @@ replace_string = "if False"
 # Replace string in all Python files starting from the current directory
 search_and_replace_in_directory('.', search_string, replace_string)
 
-
 search_string= "load_safety_checker: bool = True"
 replace_string = "load_safety_checker: bool = False"
 # Replace string in all Python files starting from the current directory
@@ -54,7 +53,10 @@ replace_string = "if False:"
 # Replace string in all Python files starting from the current directory
 search_and_replace_in_directory('.', search_string, replace_string)
 
-
+search_string= "if has_nsfw_concept:"
+replace_string = "if False:"
+# Replace string in all Python files starting from the current directory
+search_and_replace_in_directory('.', search_string, replace_string)
 
 
 # Execute the compileall command
