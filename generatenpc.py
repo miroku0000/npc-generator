@@ -109,6 +109,8 @@ def generatenpc(npcrace="", npcclass="", npcgender=""):
 		npcrace="Lord of The Rings Dwarf"
 	if "halfling" in npcrace:
 		npcrace="Lord of The Rings Hobbit"
+	if "elf" in npcrace:
+		npcrace="Lord of The Rings Elf"
 	desc = r("npcheight.txt") + " " 
 	desc = desc + r("npcattractiveness.txt") + " " 
 	desc = desc + npcgender + " " 
