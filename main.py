@@ -3,11 +3,12 @@ import torch
 import argparse
 import glob
 import time
+import json
 from diffusers import DiffusionPipeline
 
 class Predictor:
+    def getMetaData()
 
-    
     def __init__(self):
         self.pipe = self._load_model()
 
@@ -25,7 +26,10 @@ class Predictor:
         else:
             model.to("cpu")
         return model
-    
+
+    def getMetaData(prompt, width,height, steps, model):
+        ret={"prompt":prompt, "width":width, "height":height, "steps":steps,"model":model}
+        return json.dumps(ret)    
     def write_prompt_to_text_files(self, directory, prompt):
         # Search for all .png files in the specified directory
         png_files = glob.glob(os.path.join(directory, '*.png'))
@@ -80,7 +84,7 @@ def main():
         output_path = predictor.predict(args.prompt, args.width, args.height, args.steps, args.seed)
         print(f"Output image saved to: {output_path}")
         output_dir = "output"
-        predictor.write_prompt_to_text_files(output_dir, args.prompt)
+        predictor.write_prompt_to_text_files(output_dir, getMetaData(args.prompt, args.width,args.height, args.steps, args.model))
         
 def parse_args():
     parser = argparse.ArgumentParser(description="Generate images based on text prompts.")
@@ -90,6 +94,9 @@ def parse_args():
     parser.add_argument("--steps", type=int, default=8, help="The number of inference steps.")
     parser.add_argument("--seed", type=int, default=None, help="Seed for random number generation.")
     parser.add_argument("--continuous", action='store_true', help="Enable continuous generation.")
+    parser.add_argument("--model",type="string", 
+        default="SimianLuo/LCM_Dreamshaper_v7", 
+        help="'SimianLuo/LCM_Dreamshaper_v7','Ryzan/fantasy-diffusion-v1','Lykon/dreamshaper-xl-v2-turbo','Lykon/AAM_XL_AnimeMix_Turbo'")    
     return parser.parse_args()
 
 if __name__ == "__main__":
