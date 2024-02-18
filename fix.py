@@ -4,6 +4,8 @@ import os
 
 def replace_string_in_file(file_path, search_string, replace_string):
     try:
+        if fix.py in flie_path:
+            return False
         found=False
         # Read in the file with UTF-8 encoding
         with open(file_path, 'r', encoding='utf-8') as file:
@@ -46,6 +48,14 @@ search_string= "load_safety_checker: bool = True"
 replace_string = "load_safety_checker: bool = False"
 # Replace string in all Python files starting from the current directory
 search_and_replace_in_directory('.', search_string, replace_string)
+
+search_string= "if load_safety_checker:"
+replace_string = "if False:"
+# Replace string in all Python files starting from the current directory
+search_and_replace_in_directory('.', search_string, replace_string)
+
+
+
 
 # Execute the compileall command
 #os.system("python -m compileall .")
