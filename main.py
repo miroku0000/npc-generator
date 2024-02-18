@@ -36,7 +36,7 @@ class Predictor:
         for png_file in png_files:
             # Generate the new filename by adding "_prompt.txt" to the original file name
             base_name = os.path.basename(png_file)  # Get the base name of the file
-            new_filename = os.path.splitext(base_name)[0] + "_prompt.txt"  # Remove .png extension and add "_prompt.txt"
+            new_filename = os.path.splitext(base_name)[0] + "_prompt.txt"  # Remove .png extension and add ".json"
             new_filepath = os.path.join(directory, new_filename)  # Create the full path for the new file
         # Write the prompt to the new text file
         with open(new_filepath, 'w') as text_file:
