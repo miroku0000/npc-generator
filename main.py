@@ -17,6 +17,7 @@ class Predictor:
             #"Ryzan/fantasy-diffusion-v1"
             #"Lykon/dreamshaper-xl-v2-turbo"
             #"Lykon/AAM_XL_AnimeMix_Turbo"
+            #"stabilityai/stable-cascade-prior"
         )
         if torch.cuda.is_available():
             model.to("cuda")
