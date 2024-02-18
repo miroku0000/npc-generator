@@ -68,6 +68,11 @@ replace_string = "if any(False)"
 # Replace string in all Python files starting from the current directory
 search_and_replace_in_directory('.', search_string, replace_string)
 
+search_string= "if any(has_nsfw_concepts)"
+replace_string = "if any(False)"
+# Replace string in all Python files starting from the current directory
+search_and_replace_in_directory('.', search_string, replace_string)
+
 
 # Execute the compileall command
 #os.system("python -m compileall .")
