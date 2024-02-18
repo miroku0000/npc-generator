@@ -99,22 +99,27 @@ def generatenpc(npcrace="", npcclass="", npcgender=""):
 	topcolor = column(randomclothescolors,0)
 	leggingscolor = column(randomclothescolors,1)
 	shoescolor = column(randomclothescolors,2)
+
 	if not npcclass or 'random' in npcclass:
 		npcclass = r("npcclass.txt")
 	if not npcrace or 'random' in npcrace:
 		npcrace = npcrace = r("npcrace.txt")
+	race=npcrace
 	if "tabaxi" in npcrace:
-		npcrace="tabaxi humanoid catlike person"
+		race="tabaxi fluffy humanoid catlike person"
 	if "dwarf" in npcrace:
-		npcrace="Lord of The Rings Dwarf"
+		race="Lord of The Rings Dwarf"
 	if "halfling" in npcrace:
-		npcrace="Lord of The Rings Hobbit"
+		race="Lord of The Rings Hobbit"
 	if "elf" in npcrace:
-		npcrace="Lord of The Rings Elf"
+		race="Lord of The Rings Elf"
+	if "orc" in npcrace:
+		race="Lord of The Rings orc"
+
 	desc = r("npcheight.txt") + " " 
 	desc = desc + r("npcattractiveness.txt") + " " 
 	desc = desc + npcgender + " " 
-	desc = desc + npcrace + " " 
+	desc = desc + race + " " 
 	desc = desc + npcclass + "  with " 
 	desc = desc + r("npceyedescription.txt") + " " 
 	desc = desc + r("npceyeolor.txt") + " eyes"  
