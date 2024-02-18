@@ -95,7 +95,7 @@ def parse_args():
     parser.add_argument("--seed", type=int, default=None, help="Seed for random number generation.")
     parser.add_argument("--continuous", action='store_true', help="Enable continuous generation.")
     parser.add_argument("--model", default="SimianLuo/LCM_Dreamshaper_v7", 
-        choices=['SimianLuo/LCM_Dreamshaper_v7','Ryzan/fantasy-diffusion-v1','Lykon/dreamshaper-xl-v2-turbo','Lykon/AAM_XL_AnimeMix_Turbo'])    
+        choices=['SimianLuo/LCM_Dreamshaper_v7','Ryzan/fantasy-diffusion-v1','Lykon/dreamshaper-xl-v2-turbo','Lykon/AAM_XL_AnimeMix_Turbo','stabilityai/stable-cascade-prior'])    
     return parser.parse_args()
 
 if __name__ == "__main__":
