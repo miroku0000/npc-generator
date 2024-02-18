@@ -182,5 +182,5 @@ for i in range(args.scenarios):
 		#folder="output\\" + npcgender+ "_" + npcrace + "_" + npcclass  
 	#write_prompt_to_text_files("output/", prompt)
 	movefiles("output",folder, "*.png")
-	movefiles("output",folder, "*.txt")
+	movefiles("output",folder, "*.json")
 	
