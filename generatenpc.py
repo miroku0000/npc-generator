@@ -155,7 +155,7 @@ create_output_directory("output")
 create_output_directory("output/lcm")
 folder="output/lcm/"
 movefiles("output/",folder, "*.png")
-movefiles("output/",folder, "*.txt")
+movefiles("output/",folder, "*.json")
 
 # Randomly generate a prompt 4 times, or however many you specify in the scenarios parameter
 # So, each time it will generate unique NPC characteristics
