@@ -152,8 +152,8 @@ parser.add_argument("--steps", type=int, default=16)
 
 args=parser.parse_args()
 create_output_directory("output")
-create_output_directory("output/lcm")
-folder="output/lcm/"
+create_output_directory("output/misc")
+folder="output/misc/"
 movefiles("output/",folder, "*.png")
 movefiles("output/",folder, "*.json")
 
