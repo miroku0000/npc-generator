@@ -164,7 +164,7 @@ for i in range(args.scenarios):
 	npc = generatenpc(args.npcrace, args.npcclass , args.npcgender)
 	desc = npc['description']
 	npcrace = npc['race']
-	if "tabaxi" in race:
+	if "tabaxi" in npcrace:
 		race="tabaxi humanoid catlike person"
 	npcclass = npc['class']
 	npcgender= npc['gender']	
