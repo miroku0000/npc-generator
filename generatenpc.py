@@ -110,7 +110,7 @@ def generatenpc(npcrace="", npcclass="", npcgender=""):
 	if "dwarf" in npcrace:
 		race="Lord of The Rings Dwarf"
 	if "halfling" in npcrace:
-		race="Lord of The Rings Hobbit"
+		race="D&D Halfling"
 	if "elf" in npcrace:
 		race="Lord of The Rings Elf"
 	if "orc" in npcrace:
