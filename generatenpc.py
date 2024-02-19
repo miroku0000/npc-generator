@@ -108,7 +108,7 @@ def generatenpc(npcrace="", npcclass="", npcgender=""):
 	if "tabaxi" in npcrace:
 		race="tabaxi fluffy humanoid catlike person covered in fur"
 	if "dwarf" in npcrace:
-		race="Lord of The Rings Dwarf"
+		race="Lord of The Rings Dwarf, Short and sturdy humanoid with broad shoulders and a solid build, known for their impressive beards and braided hair."
 	if "halfling" in npcrace:
 		race="D&D Halfling"
 	if "elf" in npcrace:
