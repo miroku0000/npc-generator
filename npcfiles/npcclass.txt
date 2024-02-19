@@ -41,7 +41,7 @@ Messenger
 Lawyer
 Banker
 Animal
-Accountan
+Accountant
 Apprentice
 Artisan
 Assassin
