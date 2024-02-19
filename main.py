@@ -8,16 +8,16 @@ from diffusers import DiffusionPipeline
 
 class Predictor:
     
-    def __init__(self):
-        self.pipe = self._load_model()
+    def __init__(self,model):
+        self.pipe = self._load_model(model)
 
-    def _load_model(self):
+    def _load_model(self,model):
         model = DiffusionPipeline.from_pretrained(
-            "SimianLuo/LCM_Dreamshaper_v7"
+            model
+            #"SimianLuo/LCM_Dreamshaper_v7"
             #"Ryzan/fantasy-diffusion-v1"
             #"Lykon/dreamshaper-xl-v2-turbo"
             #"Lykon/AAM_XL_AnimeMix_Turbo"
-            #"stabilityai/stable-cascade-prior"
         )
         if torch.cuda.is_available():
             model.to("cuda")
@@ -28,7 +28,7 @@ class Predictor:
         return model
 
     def getMetaData(self,prompt, width,height, steps, model):
-        ret={"prompt":prompt, "width":width, "height":height, "steps":steps,"model":model}
+        ret={"prompt":prompt, "width":width, "height":height, "steps":steps,"model":model, "seed": self.seed}
         return json.dumps(ret)    
     def write_prompt_to_text_files(self, directory, prompt):
         # Search for all .png files in the specified directory
@@ -36,7 +36,7 @@ class Predictor:
         for png_file in png_files:
             # Generate the new filename by adding "_prompt.txt" to the original file name
             base_name = os.path.basename(png_file)  # Get the base name of the file
-            new_filename = os.path.splitext(base_name)[0] + "_prompt.txt"  # Remove .png extension and add ".json"
+            new_filename = os.path.splitext(base_name)[0] + ".json"  # Remove .png extension and add "_prompt.txt"
             new_filepath = os.path.join(directory, new_filename)  # Create the full path for the new file
         # Write the prompt to the new text file
         with open(new_filepath, 'w') as text_file:
@@ -48,7 +48,7 @@ class Predictor:
         seed = seed or int.from_bytes(os.urandom(2), "big")
         print(f"Using seed: {seed}")
         torch.manual_seed(seed)
-
+        self.seed=seed
         result = self.pipe(
             prompt=prompt, width=width, height=height,
             guidance_scale=8.0, num_inference_steps=steps,
@@ -69,8 +69,7 @@ class Predictor:
 
 def main():
     args = parse_args()
-    predictor = Predictor()
-
+    predictor = Predictor(args.model)
     if args.continuous:
         try:
             while True:
