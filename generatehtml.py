@@ -9,8 +9,9 @@ output_directory = "output"
 if not os.path.exists(output_directory):
     os.makedirs(output_directory)
 
-# Initialize a nested defaultdict structure for storing image paths
+# Initialize nested defaultdict structures for storing image paths
 images_metadata = defaultdict(lambda: defaultdict(lambda: defaultdict(list)))
+races_metadata = defaultdict(lambda: defaultdict(lambda: defaultdict(list)))
 
 # Traverse through each folder in the data directory
 for root, dirs, files in os.walk(data_directory):
@@ -26,14 +27,15 @@ for root, dirs, files in os.walk(data_directory):
                     # Save the relative path from the output directory to the image
                     relative_path = os.path.join(dir_name, file_name)
                     images_metadata[occupation][race][gender].append(relative_path)
+                    races_metadata[race][occupation][gender].append(relative_path)
 
-# Function to generate HTML content for each occupation
-def generate_html(occupation, data):
-    races = list(data.keys())
+# Function to generate HTML content for each category (occupation or race)
+def generate_html(title, data, category_type):
+    categories = list(data.keys())
     html_content = f"""
     <html>
     <head>
-    <title>{occupation}</title>
+    <title>{title} Page</title>
     <style>
         img {{ width: 200px; height: 200px; }}
         .hidden {{ display: none; }}
@@ -42,14 +44,10 @@ def generate_html(occupation, data):
         function filterImages(filterType, value) {{
             let images = document.querySelectorAll('div.image');
             images.forEach((image) => {{
-                if (filterType === 'race') {{
-                    if (value === 'all' || image.classList.contains(value)) {{
-                        image.classList.remove('hidden');
-                    }} else {{
-                        image.classList.add('hidden');
-                    }}
-                }} else if (filterType === 'gender') {{
-                    if (value === 'all' || image.classList.contains(value)) {{
+                if (filterType === 'all') {{
+                    image.classList.remove('hidden');
+                }} else {{
+                    if (image.classList.contains(value)) {{
                         image.classList.remove('hidden');
                     }} else {{
                         image.classList.add('hidden');
@@ -60,22 +58,24 @@ def generate_html(occupation, data):
     </script>
     </head>
     <body>
-    <h1>{occupation}</h1>
-    <button onclick="filterImages('gender', 'all')">Show All</button>
+    <h1>{title}</h1>
+    <button onclick="filterImages('all', 'all')">Show All</button>
     <button onclick="filterImages('gender', 'male')">Male</button>
     <button onclick="filterImages('gender', 'female')">Female</button>
     """
 
-    # Buttons for filtering by race
-    for race in races:
-        html_content += f"<button onclick=\"filterImages('race', '{race}')\">{race.capitalize()}</button>"
-    html_content += f"<button onclick=\"filterImages('race', 'all')\">Show All Races</button>"
-
-    # Generate image divs
-    for race in data:
-        for gender in data[race]:
-            for image_relative_path in data[race][gender]:
-                html_content += f"<div class='image {race} {gender}'><img src='{image_relative_path}' alt='{race} {gender}'><br>{race.capitalize()}, {gender.capitalize()}</div>"
+    # Generate image divs with links
+    for category in data:
+        for gender in data[category]:
+            for image_relative_path in data[category][gender]:
+                html_content += f"""
+                <div class='image {category} {gender}'>
+                    <a href='{image_relative_path}' target='_blank'>
+                        <img src='{image_relative_path}' alt='{category} {gender}' class='{gender}'>
+                    </a>
+                    <br>{category.capitalize()}, {gender.capitalize()}
+                </div>
+                """
 
     html_content += """
     </body>
@@ -85,21 +85,27 @@ def generate_html(occupation, data):
     return html_content
 
 # Create index.html content
-index_content = "<html><head><title>Index of Occupations</title></head><body><h1>Index of Occupations</h1><ul>"
+index_content = "<html><head><title>Index Page</title></head><body><h1>Index Page</h1><h2>Occupations</h2><ul>"
 
-# Write HTML files for each occupation to the output directory and update index.html content
+# Generate HTML files for each occupation and race, update index.html content
 for occupation in images_metadata:
-    filename = f"{occupation.replace(' ', '_').lower()}.html"
-    html_filename = os.path.join(output_directory, filename)
-    with open(html_filename, "w") as file:
-        file.write(generate_html(occupation, images_metadata[occupation]))
+    filename = f"occupation_{occupation.replace(' ', '_').lower()}.html"
+    with open(os.path.join(output_directory, filename), "w") as file:
+        file.write(generate_html(occupation, images_metadata[occupation], "occupation"))
     index_content += f"<li><a href='{filename}'>{occupation}</a></li>"
+
+index_content += "</ul><h2>Races</h2><ul>"
+
+for race in races_metadata:
+    filename = f"race_{race.replace(' ', '_').lower()}.html"
+    with open(os.path.join(output_directory, filename), "w") as file:
+        file.write(generate_html(race, races_metadata[race], "race"))
+    index_content += f"<li><a href='{filename}'>{race}</a></li>"
 
 index_content += "</ul></body></html>"
 
-# Write the index.html file
-index_filename = os.path.join(output_directory, "index.html")
-with open(index_filename, "w") as file:
+# Write the index.html file to the output directory
+with open(os.path.join(output_directory, "index.html"), "w") as file:
     file.write(index_content)
 
 print("HTML files and index.html have been generated in the 'output' directory.")
