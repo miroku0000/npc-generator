@@ -40,7 +40,6 @@ Doctor
 Messenger
 Lawyer
 Banker
-Animal
 Accountant
 Apprentice
 Artisan
