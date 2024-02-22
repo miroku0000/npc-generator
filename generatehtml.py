@@ -30,6 +30,7 @@ for root, dirs, files in os.walk(data_directory):
                     races_metadata[race][occupation][gender].append(relative_path)
 
 # Function to generate HTML content for each category (occupation or race)
+# Adjusted generate_html function for Flexbox layout
 def generate_html(title, data, category_type):
     categories = list(data.keys())
     html_content = f"""
@@ -37,8 +38,25 @@ def generate_html(title, data, category_type):
     <head>
     <title>{title} Page</title>
     <style>
-        img {{ width: 200px; height: 200px; }}
-        .hidden {{ display: none; }}
+        .container {{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: start;
+            gap: 10px; /* Adjust gap between images */
+        }}
+        .image {{
+            flex: 1 0 10%; /* Adjust this to change how many images per row, 20% for 5 images per row */
+            box-sizing: border-box;
+        }}
+        img {{
+            width: 100%;
+            height: auto;
+            max-width: 200px; /* Adjust max width of images */
+            max-height: 200px; /* Adjust max height of images */
+        }}
+        .hidden {{
+            display: none;
+        }}
     </style>
     <script>
         function filterImages(filterType, value) {{
@@ -62,9 +80,10 @@ def generate_html(title, data, category_type):
     <button onclick="filterImages('all', 'all')">Show All</button>
     <button onclick="filterImages('gender', 'male')">Male</button>
     <button onclick="filterImages('gender', 'female')">Female</button>
+    <div class="container">
     """
 
-    # Generate image divs with links
+    # Generate image divs with links inside the container
     for category in data:
         for gender in data[category]:
             for image_relative_path in data[category][gender]:
@@ -78,11 +97,14 @@ def generate_html(title, data, category_type):
                 """
 
     html_content += """
+    </div>
     </body>
     </html>
     """
 
     return html_content
+
+
 
 # Create index.html content
 index_content = "<html><head><title>Index Page</title></head><body><h1>Index Page</h1><h2>Occupations</h2><ul>"
