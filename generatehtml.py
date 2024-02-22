@@ -41,6 +41,9 @@ for root, dirs, files in os.walk(data_directory):
                     
                     # Include the image path in the metadata
                     metadata['path'] = os.path.join(dir_name, file_name)
+                    metadata["race"]=race
+                    metadata["gender"]=gender
+                    metadata["occupation"]= occupation
                     images_metadata[occupation][race][gender].append(metadata)
                     races_metadata[race][occupation][gender].append(metadata)
 
@@ -130,6 +133,7 @@ def generate_html(title, data, category_type):
     for category in data:
         for gender in data[category]:
             for metadata in data[category][gender]:
+                race=metadata.get("race", "N/A")
                 image_path = metadata["path"]
                 seed = metadata.get("seed", "N/A")
                 prompt = metadata.get("prompt", "N/A")
@@ -137,7 +141,8 @@ def generate_html(title, data, category_type):
                 width = metadata.get("width", "N/A")
                 height = metadata.get("height", "N/A")
                 steps = metadata.get("steps", "N/A")
-                additional_info = f"{gender.capitalize()}, {race.capitalize()}" if category_type == "occupation" else f"{gender.capitalize()}, {occupation.capitalize()}"
+                occ=metadata.get("occupation", "N/A")
+                additional_info = f"{gender.capitalize()}, {race.capitalize()}" if category_type == "occupation" else f"{gender.capitalize()}, {occ.capitalize()}"
 
                 html_content += f"""
                 <div class='image {category} {gender}'>
