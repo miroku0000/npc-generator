@@ -105,6 +105,7 @@ def generatenpc(npcrace="", npcclass="", npcgender=""):
 	if not npcrace or 'random' in npcrace:
 		npcrace = npcrace = r("npcrace.txt")
 	race=npcrace
+	theclass=npcclass
 	if "tabaxi" in npcrace:
 		race="tabaxi fluffy humanoid catlike person covered in fur"
 	if "dwarf" in npcrace:
@@ -115,19 +116,22 @@ def generatenpc(npcrace="", npcclass="", npcgender=""):
 		race="Lord of The Rings Elf"
 	if "orc" in npcrace:
 		race="Lord of The Rings orc"
+	if "Bandit" in npcclass:
+		theclass="Medieval Bandit"
+
 
 	desc = r("npcheight.txt") + " " 
 	desc = desc + r("npcattractiveness.txt") + " " 
 	desc = desc + npcgender + " " 
 	desc = desc + race + " " 
-	desc = desc + npcclass + "  with " 
+	desc = desc + theclass + "  with " 
 	desc = desc + r("npceyedescription.txt") + " " 
 	desc = desc + r("npceyeolor.txt") + " eyes"  
 	desc = desc + ", " + mouth_a_an + " " +  mouth + "  mouth, "
 	desc = desc + " a " + r("npcnose.txt") + " nose, and "
 	desc = desc + r("npchairadjective.txt") + " "
 	desc = desc + r("npchaircolor.txt") +" hair "
-	desc = desc + "wearing a " + r("npcwaistcoatfit.txt") + " " +  topcolor + " " + r("npcwaistcoat.txt") +" waistcoat, "
+	desc = desc + "wearing a " + r("npcwaistcoatfit.txt") + " " +  topcolor + " " + r("npcwaistcoat.txt") +r("npctops.txt")+", "
 	desc = desc + leggingscolor + " " + r("leggings.txt") + " leggings and " 
 	desc = desc + shoescolor + " " + r("npcshoes.txt")
 	npc={}
@@ -152,7 +156,7 @@ def createPicture(desc,steps=16, width=512, height=512, seed=""):
 	os.system(cmd) 
 parser=argparse.ArgumentParser(description="sample argument parser")
 parser.add_argument("--npcrace", choices=['human','elf','dwarf','halfling','gnome','orc','tabaxi', 'random'], default='random')
-parser.add_argument("--npcclass", default='random', choices=['druid','bard','wizard','barbarian','rogue','sorcerer','warlock','cleric','fighter','shopkeep','bartender','whore','innkeeper','random'])
+parser.add_argument("--npcclass", default='random')
 parser.add_argument("--npcgender", default='random', choices=['male','female','random'])
 parser.add_argument("--seed")
 parser.add_argument("--folder")
