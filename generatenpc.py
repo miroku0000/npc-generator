@@ -117,8 +117,7 @@ def generatenpc(npcrace="", npcclass="", npcgender=""):
 	if "orc" in npcrace:
 		race="Lord of The Rings orc"
 	if "Bandit" in npcclass:
-		theclass="Medieval Bandit"
-
+		theclass="Medieval Bandit, armed with a " + r("npcweapon.txt") +", "
 
 	desc = r("npcheight.txt") + " " 
 	desc = desc + r("npcattractiveness.txt") + " " 
