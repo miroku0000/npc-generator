@@ -64,7 +64,7 @@ def column(s,n):
 	"""
 	return s.split("|")[n]
 
-def r(filename, folder="npcfiles"):
+def r(filename, default="", folder="npcfiles",):
 	"""
 	Reads a text file an retuns a random line from it.
 
@@ -78,7 +78,7 @@ def r(filename, folder="npcfiles"):
 			else:
 				return "File is empty."
 	except FileNotFoundError:
-		return f"File '{filename}' not found."
+		return default
 
 def generatenpc(npcrace="", npcclass="", npcgender=""):
 	"""
@@ -103,33 +103,16 @@ def generatenpc(npcrace="", npcclass="", npcgender=""):
 	if not npcclass or 'random' in npcclass:
 		npcclass = r("npcclass.txt")
 	if not npcrace or 'random' in npcrace:
-		npcrace = npcrace = r("npcrace.txt")
-	race=npcrace
+		therace  = r(npcrace + ".txt",npcrace)
 	theclass=npcclass
-	if "tabaxi" in npcrace:
-		race="tabaxi fluffy humanoid catlike person covered in fur"
-	if "dwarf" in npcrace:
-		race="Lord of The Rings Dwarf, Short and sturdy humanoid with broad shoulders and a solid build, known for their impressive beards and braided hair."
-	if "halfling" in npcrace:
-		race="D&D Halfling"
-	if "elf" in npcrace:
-		race="Lord of The Rings Elf"
-	if "orc" in npcrace:
-		race="Lord of The Rings orc"
-	if "Bandit" in npcclass:
-		theclass="Medieval Bandit, armed with a " + r("npcweapon.txt") +", 	"
-	if "Bartender" in npcclass:
-		theclass="Medieval Bartender, serving drinks,  "
-	if "bar worker" in npcclass:
-		theclass="Medieval bar worker, carrying several mugs of ale in each hand,  "
-	if "Artison" in npcclass:
-		theclass="Medieval Artison, creating art,  "
-	if "Apprentice" in npcclass:
-		theclass="Medieval Apprentice, working on a medieval craft,  "
+	race = r(race.lower() + ".txt", race.lower())
+	theclass = theclass + r(npcclass +"weapon.txt","") + " "
+	theclass = theclass + r(npcclass+"activities.txt","") + " "
+	
 	desc = r("npcheight.txt") + " " 
 	desc = desc + r("npcattractiveness.txt") + " " 
 	desc = desc + npcgender + " " 
-	desc = desc + race + " " 
+	desc = desc + therace + " " 
 	desc = desc + theclass + "  with " 
 	desc = desc + r("npceyedescription.txt") + " " 
 	desc = desc + r("npceyeolor.txt") + " eyes"  
