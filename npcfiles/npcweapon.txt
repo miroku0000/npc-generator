@@ -1,0 +1,14 @@
+longsword
+longbow
+heavy crossbow
+light crossbow
+pike
+spear
+whip
+shortsword in each hand
+scimitar
+dagger
+shortbow
+quarterstaff
+rapier
+net and a spear
