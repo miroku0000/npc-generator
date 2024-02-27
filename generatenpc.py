@@ -103,12 +103,14 @@ def generatenpc(npcrace="", npcclass="", npcgender=""):
 	if not npcclass or 'random' in npcclass:
 		npcclass = r("npcclass.txt")
 	if not npcrace or 'random' in npcrace:
-		therace  = r(npcrace + ".txt",npcrace)
+		therace  = r("npcrace.txt","human")
+	else:
+		therace = npcrace
 	theclass=npcclass
-	race = r(race.lower() + ".txt", race.lower())
+	therace = r(therace.lower() + ".txt", therace.lower())
 	theclass = theclass + r(npcclass +"weapon.txt","") + " "
 	theclass = theclass + r(npcclass+"activities.txt","") + " "
-	
+
 	desc = r("npcheight.txt") + " " 
 	desc = desc + r("npcattractiveness.txt") + " " 
 	desc = desc + npcgender + " " 
