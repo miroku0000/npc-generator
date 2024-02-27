@@ -106,11 +106,12 @@ def generatenpc(npcrace="", npcclass="", npcgender=""):
 		therace  = r("npcrace.txt","human")
 	else:
 		therace = npcrace
-	theclass=npcclass
+	theclass = npcclass.lower()
+	theclass = r(theclass+".txt",theclass)
 	therace = r(therace.lower() + ".txt", therace.lower())
 	theclass = theclass + r(npcclass +"weapon.txt","") + " "
 	theclass = theclass + r(npcclass+"activities.txt","") + " "
-
+ 
 	desc = r("npcheight.txt") + " " 
 	desc = desc + r("npcattractiveness.txt") + " " 
 	desc = desc + npcgender + " " 
