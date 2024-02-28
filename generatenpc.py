@@ -7,6 +7,22 @@ import random
 import os
 import glob
 
+import os
+
+def remove_empty_subdirs(dir_path):
+    # Walk through all subdirectories in the given directory
+    for root, dirs, files in os.walk(dir_path, topdown=False):
+        for dir_name in dirs:
+            # Construct the full path to the directory
+            full_dir_path = os.path.join(root, dir_name)
+                        # Check if the directory is empty
+            if not os.listdir(full_dir_path):
+                # Remove the empty directory
+                os.rmdir(full_dir_path)
+                print(f"Removed empty directory: {full_dir_path}")
+
+
+
 def write_prompt_to_text_files(directory, prompt):
     # Search for all .png files in the specified directory
     png_files = glob.glob(os.path.join(directory, '*.png'))
@@ -111,22 +127,27 @@ def generatenpc(npcrace="", npcclass="", npcgender=""):
 	therace = r(therace.lower() + ".txt", therace.lower())
 	theclass = theclass + r(npcclass +"weapon.txt","") + " "
 	theclass = theclass + r(npcclass+"activities.txt","") + " "
- 
+ 	
 	desc = r("npcheight.txt") + " " 
 	desc = desc + r("npcattractiveness.txt") + " " 
 	desc = desc + npcgender + " " 
 	desc = desc + therace + " " 
-	desc = desc + theclass + "  with " 
+	desc = desc + theclass + " with " 
 	desc = desc + r("npceyedescription.txt") + " " 
 	desc = desc + r("npceyeolor.txt") + " eyes"  
 	desc = desc + ", " + mouth_a_an + " " +  mouth + "  mouth, "
 	desc = desc + " a " + r("npcnose.txt") + " nose, and "
 	desc = desc + r("npchairadjective.txt") + " "
 	desc = desc + r("npchaircolor.txt") +" hair "
-	desc = desc + "wearing a " + r("npcwaistcoatfit.txt") + " " +  topcolor + " " + r("npcwaistcoat.txt") +r("npctops.txt")+", "
+	desc = desc + "wearing a " + r("npcwaistcoatfit.txt") + " " +  topcolor + " " + r("npcwaistcoat.txt") + " "+ r("npctops.txt")+", "
 	desc = desc + leggingscolor + " " + r("leggings.txt") + " leggings and " 
 	desc = desc + shoescolor + " " + r("npcshoes.txt")
 	npc={}
+	if "female" in npcgender:
+		desc = desc.replace("their","her")
+	else:
+		if "male" in npcgender:
+			desc = desc.replace("their","his")
 	npc["description"] = desc
 	npc["race"] = npcrace
 	npc["class"] = npcclass
@@ -160,6 +181,9 @@ parser.add_argument("--steps", type=int, default=16)
 
 
 args=parser.parse_args()
+
+
+remove_empty_subdirs("output")
 create_output_directory("output")
 create_output_directory("output/misc")
 folder="output/misc/"
@@ -173,7 +197,7 @@ for i in range(args.scenarios):
 	npc = generatenpc(args.npcrace, args.npcclass , args.npcgender)
 	desc = npc['description']
 	npcrace = npc['race']
-	npcclass = npc['class']
+	npcclass = npc['class'].lower()
 	npcgender= npc['gender']	
 	prompt=r("npcprompts.txt") + " " + desc
 	#write_to_file( os.path.join(output,prompt_' + npcgender +"_" + npcrace +"_" + npcclass+"_" + str(random.randint(10000000, 99999999))+".txt", prompt))
