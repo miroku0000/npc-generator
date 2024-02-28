@@ -2,6 +2,25 @@ import os
 import json
 from collections import defaultdict
 
+import os
+import shutil
+
+def delete_empty_subdirs(directory):
+    try:
+        # Iterate over each item in the directory
+        for item in os.listdir(directory):
+            item_path = os.path.join(directory, item)
+            # Check if the item is a directory and starts with "male_" or "female_"
+            if os.path.isdir(item_path) and (item.startswith('male_') or item.startswith('female_')):
+                # Check if the directory is empty or contains only 'desktop.ini'
+                if not os.listdir(item_path) or (len(os.listdir(item_path)) == 1 and 'desktop.ini' in os.listdir(item_path)):
+                    # Delete the directory
+                    shutil.rmtree(item_path)
+                    print(f"Deleted {item_path}")
+
+    except:
+        pass
+         
 # Define the directory for reading the data and for writing the HTML files
 data_directory = "output"
 output_directory = "output"
@@ -18,6 +37,9 @@ for file in os.listdir(output_directory):
 # Initialize nested defaultdict structures for storing image paths and metadata
 images_metadata = defaultdict(lambda: defaultdict(lambda: defaultdict(list)))
 races_metadata = defaultdict(lambda: defaultdict(lambda: defaultdict(list)))
+
+directory = "output"
+delete_empty_subdirs(directory)
 
 # Traverse through each folder in the data directory
 for root, dirs, files in os.walk(data_directory):
@@ -46,6 +68,9 @@ for root, dirs, files in os.walk(data_directory):
                     metadata["occupation"]= occupation
                     images_metadata[occupation][race][gender].append(metadata)
                     races_metadata[race][occupation][gender].append(metadata)
+
+
+
 
 # Function to generate HTML content for each category (occupation or race)
 def generate_html(title, data, category_type):
