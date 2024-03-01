@@ -123,8 +123,8 @@ def generatenpc(npcrace="", npcclass="", npcgender=""):
 	else:
 		therace = npcrace
 	theclass = npcclass.lower()
-	theclass = r(theclass+".txt",theclass)
-	therace = r(therace.lower() + ".txt", therace.lower())
+	theclass = r(theclass+".txt",theclass) + " "
+	therace = r(therace.lower() + ".txt", therace.lower()) 
 	theclass = theclass + r(npcclass +"weapon.txt","") + " "
 	theclass = theclass + r(npcclass+"activities.txt","") 
  	
@@ -135,8 +135,8 @@ def generatenpc(npcrace="", npcclass="", npcgender=""):
 	desc = desc + theclass + " with " 
 	desc = desc + r("npceyedescription.txt") + " " 
 	desc = desc + r("npceyeolor.txt") + " eyes"  
-	desc = desc + ", " + mouth_a_an + " " +  mouth + "  mouth, "
-	desc = desc + " a " + r("npcnose.txt") + " nose, and "
+	desc = desc + ", " + mouth_a_an + " " +  mouth + " mouth, "
+	desc = desc + "sa " + r("npcnose.txt") + " nose, and "
 	desc = desc + r("npchairadjective.txt") + " "
 	desc = desc + r("npchaircolor.txt") +" hair "
 	desc = desc + "wearing a " + r("npcwaistcoatfit.txt") + " " +  topcolor + " " + r("npcwaistcoat.txt") + " "+ r("npctops.txt")+", "
