@@ -6,6 +6,7 @@ import shutil
 import random
 import os
 import glob
+import re
 
 import os
 
@@ -136,7 +137,7 @@ def generatenpc(npcrace="", npcclass="", npcgender=""):
 	desc = desc + r("npceyedescription.txt") + " " 
 	desc = desc + r("npceyeolor.txt") + " eyes"  
 	desc = desc + ", " + mouth_a_an + " " +  mouth + " mouth, "
-	desc = desc + "sa " + r("npcnose.txt") + " nose, and "
+	desc = desc + "a " + r("npcnose.txt") + " nose, and "
 	desc = desc + r("npchairadjective.txt") + " "
 	desc = desc + r("npchaircolor.txt") +" hair "
 	desc = desc + "wearing a " + r("npcwaistcoatfit.txt") + " " +  topcolor + " " + r("npcwaistcoat.txt") + " "+ r("npctops.txt")+", "
@@ -148,7 +149,9 @@ def generatenpc(npcrace="", npcclass="", npcgender=""):
 	else:
 		if "male" in npcgender:
 			desc = desc.replace("their","his")
-	npc["description"] = desc
+	# Replace 2 or more spaces with a single space
+	npc["description"] = re.sub(r'\s+', ' ', desc)
+	npc["description"] = npc["description"].replace(",","")
 	npc["race"] = npcrace
 	npc["class"] = npcclass
 	npc["gender"] = npcgender
@@ -197,7 +200,7 @@ for i in range(args.scenarios):
 	npc = generatenpc(args.npcrace, args.npcclass , args.npcgender)
 	desc = npc['description']
 	npcrace = npc['race']
-	npcclass = npc['class'].lower()
+	npcclass = npc['class'].lower()	
 	npcgender= npc['gender']	
 	prompt=r("npcprompts.txt") + " " + desc
 	#write_to_file( os.path.join(output,prompt_' + npcgender +"_" + npcrace +"_" + npcclass+"_" + str(random.randint(10000000, 99999999))+".txt", prompt))
