@@ -52,7 +52,7 @@ if __name__ == "__main__":
             print("Need more images of |" + gender + "| |" + race + "| |" + job + "|")
 
             # Constructing the command with the calculated values
-            command = f'venv\\Scripts\\activate venv && python generatenpc.py --npcgender {gender} --npcrace {race} --npcclass "{job}" --imagesperscenario 1 --scenarios 20 --steps 16 --width 256 --height 256'
+            command = f'venv\\Scripts\\activate venv && python generatenpc.py --npcgender {gender} --npcrace {race} --npcclass "{job}" --imagesperscenario 1 --scenarios 20 --steps 32 --width 256 --height 256'
 
             # Measuring the time before executing the command
             command_start_time = time.time()
