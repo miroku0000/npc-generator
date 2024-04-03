@@ -171,7 +171,7 @@ def createPicture(desc,steps=16, width=512, height=512, seed=""):
 		cmd = cmd + " --seed " + str(seed)
 	os.system(cmd) 
 parser=argparse.ArgumentParser(description="sample argument parser")
-parser.add_argument("--npcrace", choices=['human','elf','dwarf','halfling','gnome','orc','tabaxi', 'random'], default='random')
+parser.add_argument("--npcrace", choices=['human','elf','dwarf','halfling','gnome','orc','tabaxi','tiefling', 'random'], default='random')
 parser.add_argument("--npcclass", default='random')
 parser.add_argument("--npcgender", default='random', choices=['male','female','random'])
 parser.add_argument("--seed")
@@ -197,6 +197,7 @@ movefiles("output/",folder, "*.json")
 # So, each time it will generate unique NPC characteristics
 # randomly chosen if you do not specify them  	
 for i in range(args.scenarios):
+	print("Generating scenario =" + str(i+1) + " of " + str(args.scenarios) + " scenarios") 
 	npc = generatenpc(args.npcrace, args.npcclass , args.npcgender)
 	desc = npc['description']
 	npcrace = npc['race']
@@ -206,7 +207,8 @@ for i in range(args.scenarios):
 	#write_to_file( os.path.join(output,prompt_' + npcgender +"_" + npcrace +"_" + npcclass+"_" + str(random.randint(10000000, 99999999))+".txt", prompt))
 	print(prompt)
 	# The following will create <imagesperscenario> images for each prompt
-	for i in range(args.imagesperscenario):
+	for j in range(args.imagesperscenario):
+		print("generating image " + str(j+1) + " of " + str(args.imagesperscenario) + " for scenario " + str(i+1))
 		#createPicture(desc,args.args.seed)
 		createPicture(desc, args.steps, args.width, args.height)
 	if args.folder:
