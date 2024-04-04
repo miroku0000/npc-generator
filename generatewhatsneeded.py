@@ -52,7 +52,7 @@ if __name__ == "__main__":
             print("Need more images of |" + gender + "| |" + race + "| |" + job + "|")
 
             # Constructing the command with the calculated values
-            command = f'venv\\Scripts\\activate venv && python generatenpc.py --npcgender {gender} --npcrace {race} --npcclass "{job}" --imagesperscenario 1 --scenarios 20 --steps 32 --width 1024 --height 1024'
+            command = f'venv\\Scripts\\activate venv && python generatenpc.py --npcgender {gender} --npcrace {race} --npcclass "{job}" --imagesperscenario 1 --scenarios 1 --steps 32 --width 1024 --height 1024'
 
             # Measuring the time before executing the command
             command_start_time = time.time()
@@ -68,13 +68,15 @@ if __name__ == "__main__":
             print(f"Time taken for command: {command_duration} seconds")
 
             print("Running qa")
-            command = f'venv\\Scripts\\activate venv && python qa.py'
             current_directory = os.getcwd()
-            print(current_directory)
+            mbdir=os.path.join(current_directory, "moondream")
+            qapath=os.path.join(mbdir,"qa.py")
+            command = f'venv\\Scripts\\activate venv && pwd && python qa.py'  
             subprocess.run(command, shell=True, cwd=os.path.join(current_directory, "moondream"))
                     
             # Executing the command
             subprocess.run(command, shell=True)
+            print("subprocess.run complete")
          
 
         else:
