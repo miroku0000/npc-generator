@@ -68,7 +68,7 @@ if __name__ == "__main__":
             print(f"Time taken for command: {command_duration} seconds")
 
             print("Running qa")
-            command = f'..\\venv\\Scripts\\activate venv && python qa.py'
+            command = f'venv\\Scripts\\activate venv && python qa.py'
             current_directory = os.getcwd()
             print(current_directory)
             subprocess.run(command, shell=True, cwd=os.path.join(current_directory, "moondream"))
