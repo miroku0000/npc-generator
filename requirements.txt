@@ -3,4 +3,5 @@ accelerate>=0.23.0
 #torchvision==0.15.2
 diffusers>=0.23.0
 Pillow>=10.1.0
-transformers>=4.34.1
+peft >= 0.6.0
+transformers >= 4.34.0
